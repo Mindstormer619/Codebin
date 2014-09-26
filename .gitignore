@@ -1,0 +1,5 @@
+node_modules
+public/javascripts/*
+!public/javascripts/.gitkeep
+codebin_node.sub*
+npm-debug.log
