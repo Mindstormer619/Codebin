@@ -22,7 +22,7 @@ router.get('/', function(req, res) {
 
 router.get('/:idx', function (req, res, next) {
 	console.log("Id path called");
-	var multiline = require('multiline');
+	//var multiline = require('multiline');
 	//console.log();
 	var db = req.db;
 	var collection = db.get('codebinData');
