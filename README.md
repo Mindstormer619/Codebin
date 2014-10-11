@@ -3,8 +3,19 @@ Codebin
 
 A modern hackable, opensourced, userfriendly Pastebin for sharing text, codes, screen shots (images) with new features. The server is implemented in NodeJS, with a MongoDB database. I have coded this in the Windows environment, however, it should work splendidly on Linux/Mac. In case there are any problems, feel free to [email me](mailto:mindstormer619@gmail.com).
 
-At the moment the implementation is a simple test with post request and Ace Editor. Please feel free to fork and modify.
-Please check database implementation on branch nodetest.
+Currently, this code reflects the first fully functioning version v0.1.0.
+
+Features
+--------
+
+Current features (v0.1.0) are:
+
+- Syntax highlighting
+- Support for 11 language sets
+- Save and sharable short url capability
+
+Lots more features are planned :D
+
 
 Usage
 -----
@@ -21,4 +32,4 @@ Steps for usage are as follows, do exactly:
 - Run `mongod --dbpath ./data` (or on Windows, `mongod --dbpath .\data` )
 - Run `npm start` in a new terminal (or cmd or PowerShell)
 - Open `localhost:3000`
-- Clicking the Save button sends the data to the server in post request visible as console log on server side
+- Clicking the Save button sends the data to the server in post request, server modifies database and redirects to required page.
