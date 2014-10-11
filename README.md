@@ -29,12 +29,13 @@ Steps for usage are as follows, do exactly:
 - Get jquery-1.11.1-min.js from jquery's page and place in public/javascripts
 - Get bootstrap.min.js from bootstrap and place in public/javascripts
 - Run `npm install`. This may take a while on slower internet connections. In case the installation did not occur properly, delete the node_modules folder before trying again.
-- Create folder `data` in the repo root
 - Run `mongod --dbpath ./data` (or on Windows, `mongod --dbpath .\data` ) and keep the terminal open
 - Run `mongo` in a new terminal. Type the following:
-	> use nodetest1
-	> db.createCollection('codebinData')
-	> exit
+
+		> use nodetest1
+		> db.createCollection('codebinData')
+		> exit
+		
 - Run `npm start` (or cmd or PowerShell) and keep the terminal open
 - Open `localhost:3000`
 - Clicking the Save button sends the data to the server in post request, server modifies database and redirects to required page.
