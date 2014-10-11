@@ -5,3 +5,5 @@ codebin_node.sub*
 npm-debug.log
 files/*.txt
 controlFlow.txt
+data/*
+!data/README
