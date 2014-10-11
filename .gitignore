@@ -3,3 +3,5 @@ public/javascripts/*
 !public/javascripts/.gitkeep
 codebin_node.sub*
 npm-debug.log
+files/*.txt
+controlFlow.txt

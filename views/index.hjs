@@ -49,7 +49,7 @@
                             <option value="javascript">Javascript</option>
                             <option value="python">Python</option>
                             <option value="php">PHP</option>
-                            <option value="htmlmixed">HTML</option>
+                            <option value="html">HTML</option>
                             <option value="css">CSS</option>
                             <option value="c_cpp">C/C++</option>
                             <option value="java">Java</option>
@@ -75,7 +75,7 @@
             <!-- Page Content -->
             <div id="page-contxent-wrapper">
 
-                <pre id="editor"></pre>
+                <pre id="editor">{{contents}}</pre>
             </div> 
             <!-- /#page-content-wrapper -->
 
@@ -86,8 +86,11 @@
 
 <script src="/javascripts/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    var contents = "";
-    var lang = "python"
+
+    var mode = "ace/mode/text"
+    {{#mode}}
+        mode = "{{mode}}"
+    {{/mode}}
 
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
@@ -98,11 +101,13 @@
 
 
     editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/"+lang);
-    editor.setValue(contents);
+    editor.getSession().setMode(mode);
     editor.setShowPrintMargin(false);
+    editor.session.setOption("useWorker", false)
     editor.focus()
-    document.getElementById('mode').value = lang;
+    var modeParts = mode.split('/')
+    
+    document.getElementById('mode').value = modeParts[modeParts.length - 1];
     $('#mode').on('change', function(){
         console.log("Change");
         var newMode = document.getElementById('mode').value
@@ -113,8 +118,11 @@
     function save() {
         contents = editor.getValue();
         console.log(contents)
-        $.post('/savePath', {values: contents}, function(data) {
-            console.log("Done!")
+        $.post('/savePath', {values: contents, mode: editor.session.$modeId}, function(data) {
+            console.log("Done!");
+            if (typeof data.redirectTo == 'string') {
+                window.location = data.redirectTo;
+            }
         } );
     }
 </script>
