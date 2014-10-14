@@ -7,3 +7,4 @@ files/*.txt
 controlFlow.txt
 data/*
 !data/README
+*~
