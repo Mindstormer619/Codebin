@@ -1,6 +1,7 @@
 var fs = require('fs');
 var express = require('express');
 var router = express.Router();
+var shortid = require('shortid');
 
 /* GET users listing. */
 router.post('/', function(req, res) {
@@ -9,7 +10,7 @@ router.post('/', function(req, res) {
 	console.log("Referer: "+req.headers.referer);
 	var mode = req.body.mode;
 	var valText = req.body.values;
-	var urlVal = Date.now().toString(36); //or other function here
+	var urlVal = shortid.generate(); //or other function here
 	var encType = req.body.mode;
 	var dateCreated = Date.now();
 	var urlParts = req.headers.referer.split('/');

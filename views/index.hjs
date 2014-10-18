@@ -3,83 +3,83 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CodeBin">
-    <meta name="author" content="Spider">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="CodeBin">
+	<meta name="author" content="Spider">
 
-    <title>Code Bin!!!</title>
+	<title>Code Bin!!!</title>
 
-    <link href="/stylesheets/bootstrap.css" rel="stylesheet">
-    <!-- Custom css -->
-    <link href="/stylesheets/new.css" rel="stylesheet">
-  
-     <!-- jQuery Version 1.11.0 -->
-    <script src="/javascripts/jquery-1.11.1.min.js"></script>
+	<link href="/stylesheets/bootstrap.css" rel="stylesheet">
+	<!-- Custom css -->
+	<link href="/stylesheets/new.css" rel="stylesheet">
+	
+	<!-- jQuery Version 1.11.0 -->
+	<script src="/javascripts/jquery-1.11.1.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/javascripts/bootstrap.min.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="/javascripts/bootstrap.min.js"></script>
 
-    <style type="text/css" media="screen">
-   
-    
-    #editor { 
-        font-size: 16px;
-        border: 0px;
-        padding: 0px;
-        width: 100%;
-        height: 90vh;
-        outline: none;
-        resize: none;
-    }
-    </style>
-   
+	<style type="text/css" media="screen">
+	
+	
+	#editor { 
+		font-size: 16px;
+		border: 0px;
+		padding: 0px;
+		width: 100%;
+		height: 90vh;
+		outline: none;
+		resize: none;
+	}
+	</style>
+	
 </head>
 <body>
-    
+	
 
-        <div id="wrapper">
-            <!-- Sidebar -->
-            <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <li class="sidebar-brand">
-                        <select id="mode">
-                            <option value="text">Text</option>
-                            <option value="javascript">Javascript</option>
-                            <option value="python">Python</option>
-                            <option value="php">PHP</option>
-                            <option value="html">HTML</option>
-                            <option value="css">CSS</option>
-                            <option value="c_cpp">C/C++</option>
-                            <option value="java">Java</option>
-                            <option value="mysql">MySQL</option>
-                            <option value="csharp">C#</option>
-                            <option value="xml">XML</option>
-                        </select>
-                    </li>
-                    <li>
-                        <button class="btn btn-default" onclick="save()">Save</button>
-                    </li>
+	<div id="wrapper">
+		<!-- Sidebar -->
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav">
+				<li class="sidebar-brand">
+					<select id="mode">
+						<option value="text">Text</option>
+						<option value="javascript">Javascript</option>
+						<option value="python">Python</option>
+						<option value="php">PHP</option>
+						<option value="html">HTML</option>
+						<option value="css">CSS</option>
+						<option value="c_cpp">C/C++</option>
+						<option value="java">Java</option>
+						<option value="mysql">MySQL</option>
+						<option value="csharp">C#</option>
+						<option value="xml">XML</option>
+					</select>
+				</li>
+				<li>
+					<button class="btn btn-default" onclick="save()">Save</button>
+				</li>
 
-                </ul>
-               
-                    
-                
-            </div>
-            <div id="tog">
-                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">&gt;&gt;</a>
-            </div>
-            <!-- /#sidebar-wrapper -->
-            
-            <!-- Page Content -->
-            <div id="page-contxent-wrapper">
+			</ul>
+			
+			
+			
+		</div>
+		<div id="tog">
+			<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">&gt;&gt;</a>
+		</div>
+		<!-- /#sidebar-wrapper -->
+		
+		<!-- Page Content -->
+		<div id="page-contxent-wrapper">
 
-                <pre id="editor">{{contents}}</pre>
-            </div> 
-            <!-- /#page-content-wrapper -->
+			<pre id="editor">{{contents}}</pre>
+		</div> 
+		<!-- /#page-content-wrapper -->
 
-        </div>
+	</div>
 
 </body>
 
@@ -87,44 +87,44 @@
 <script src="/javascripts/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
 
-    var mode = "ace/mode/text"
-    {{#mode}}
-        mode = "{{mode}}"
-    {{/mode}}
+var mode = "ace/mode/text"
+{{#mode}}
+mode = "{{mode}}"
+{{/mode}}
 
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-        $("#tog").toggleClass("toggled");
-    });
-    var editor = ace.edit("editor");
+$("#menu-toggle").click(function(e) {
+	e.preventDefault();
+	$("#wrapper").toggleClass("toggled");
+	$("#tog").toggleClass("toggled");
+});
+var editor = ace.edit("editor");
 
 
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode(mode);
-    editor.setShowPrintMargin(false);
-    editor.session.setOption("useWorker", false)
-    editor.focus()
-    var modeParts = mode.split('/')
-    
-    document.getElementById('mode').value = modeParts[modeParts.length - 1];
-    $('#mode').on('change', function(){
-        console.log("Change");
-        var newMode = document.getElementById('mode').value
-        console.log(newMode);
-        editor.getSession().setMode("ace/mode/" + newMode);
-    });
+editor.setTheme("ace/theme/monokai");
+editor.getSession().setMode(mode);
+editor.setShowPrintMargin(false);
+editor.session.setOption("useWorker", false);
+editor.focus();
+var modeParts = mode.split('/');
 
-    function save() {
-        contents = editor.getValue();
-        console.log(contents)
-        $.post('/savePath', {values: contents, mode: editor.session.$modeId}, function(data) {
-            console.log("Done!");
-            if (typeof data.redirectTo == 'string') {
-                window.location = data.redirectTo;
-            }
-        } );
-    }
+document.getElementById('mode').value = modeParts[modeParts.length - 1];
+$('#mode').on('change', function(){
+	console.log("Change");
+	var newMode = document.getElementById('mode').value
+	console.log(newMode);
+	editor.getSession().setMode("ace/mode/" + newMode);
+});
+
+function save() {
+	contents = editor.getValue();
+	console.log(contents);
+	$.post('/savePath', {values: contents, mode: editor.session.$modeId}, function(data) {
+		console.log("Done!");
+		if (typeof data.redirectTo == 'string') {
+			window.location = data.redirectTo;
+		}
+	} );
+}
 </script>
 
 
