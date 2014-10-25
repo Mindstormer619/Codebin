@@ -1,7 +1,8 @@
 Codebin
 =======
 
-A modern hackable, opensourced, userfriendly Pastebin for sharing text, codes, screen shots (images) with new features. The server is implemented in NodeJS, with a MongoDB database. I have coded this in the Windows environment, however, it should work splendidly on Linux/Mac. In case there are any problems, feel free to [email me](mailto:mindstormer619@gmail.com).
+A modern hackable, opensourced, userfriendly Pastebin for sharing text, codes, screen shots (images) with new features.  
+The server is implemented in NodeJS, with a MongoDB database. I have coded this in the Windows environment, however, it should work splendidly on Linux/Mac. In case there are any problems, feel free to [email me](mailto:mindstormer619@gmail.com).
 
 Currently, this code reflects the first fully functioning version v0.1.0.
 
@@ -30,13 +31,13 @@ Steps for usage are as follows, do exactly:
 		"scripts": {
 		  "start": "nodemon ./bin/www"
 		}
-	
+
 	to
-	
+
 		"scripts": {
 		  "start": "node ./bin/www"
 		}
-		
+
 - Get the folder src-min-noconflict from the [ace-builds repository](https://github.com/ajaxorg/ace-builds/) and place it in public/javascripts
 - Get jquery-1.11.1-min.js from jquery's page and place in public/javascripts
 - Get bootstrap.min.js from bootstrap and place in public/javascripts
@@ -47,7 +48,7 @@ Steps for usage are as follows, do exactly:
 		> use nodetest1
 		> db.createCollection('codebinData')
 		> exit
-		
+
 - Run `npm start` and keep the terminal open. This IS the server and must be kept running in order to work.
 - Open `localhost:3000` in the browser (Tested on the latest Chrome, though it should work as expected anywhere Ace Editor does)
 - Clicking the Save button sends the data to the server in post request, server modifies database and redirects to required page.

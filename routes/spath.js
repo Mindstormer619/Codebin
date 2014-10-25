@@ -64,7 +64,7 @@ router.post('/', function(req, res) {
 			console.log("No prev version");
 			dbInsertObj();
 		}
-		
+
 	});
 	console.log("Reached end, for some reason");
 	//res.end();

@@ -56,10 +56,10 @@ router.get('/:idx', function (req, res, next) {
 			});
 			//res.end();
 		});
-		
+
 	});
 	//res.status(404).send('Not Found!');
-	
+
 });
 
 module.exports = router;
