@@ -13,6 +13,7 @@ var db = monk('localhost:27017/nodetest1');
 var routes = require('./routes/index');
 //var users = require('./routes/users');
 var spath = require('./routes/spath');
+var diffpath = require('./routes/diffpath');
 
 var app = express();
 
@@ -42,6 +43,8 @@ app.use(function(req, res, next){
 app.use('/', routes);
 //app.use('/users', users);
 app.use('/savePath', spath);
+app.use('/diffPath', diffpath);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -52,7 +52,8 @@ router.get('/:idx', function (req, res, next) {
 			//console.log("File contents: \n"+fileContents);
 			res.render('index', {
 				'contents' : fileContents,
-				'mode' : mode
+				'mode' : mode,
+				'revisions': revisions
 			});
 			//res.end();
 		});

@@ -29,13 +29,13 @@ Steps for usage are as follows, do exactly:
 - For developmental purposes, the app uses [nodemon](https://github.com/remy/nodemon) to run the server, so install that with `npm install -g nodemon` into the Terminal, or simply avoid it and use the standard node command by opening `package.json` and changing the following:
 
 		"scripts": {
-		  "start": "nodemon ./bin/www"
+			"start": "nodemon ./bin/www"
 		}
 
 	to
 
 		"scripts": {
-		  "start": "node ./bin/www"
+			"start": "node ./bin/www"
 		}
 
 - Get the folder src-min-noconflict from the [ace-builds repository](https://github.com/ajaxorg/ace-builds/) and place it in public/javascripts
