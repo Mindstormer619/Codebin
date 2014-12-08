@@ -22,8 +22,7 @@ router.get('/', function(req, res) {
 
 router.get('/:idx', function (req, res, next) {
 	console.log("Id path called");
-	//var multiline = require('multiline');
-	//console.log();
+
 	var db = req.db;
 	var collection = db.get('codebinData');
 	console.log("idpath: collection found");
@@ -41,6 +40,8 @@ router.get('/:idx', function (req, res, next) {
 		console.log("idpath: fileUrl=>"+fileUrl);
 		var mode = doc['mode'];
 		var fileContents = "";
+		var revisions = doc['revisions'];
+		console.log(revisions);
 		console.log("About to read file");
 		fs.readFile(fileUrl, function (err, data) {
 			if (err) throw err;

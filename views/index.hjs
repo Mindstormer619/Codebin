@@ -14,7 +14,7 @@
 	<link href="/stylesheets/bootstrap.css" rel="stylesheet">
 	<!-- Custom css -->
 	<link href="/stylesheets/new.css" rel="stylesheet">
-	
+
 	<!-- jQuery Version 1.11.0 -->
 	<script src="/javascripts/jquery-1.11.1.min.js"></script>
 
@@ -22,9 +22,9 @@
 	<script src="/javascripts/bootstrap.min.js"></script>
 
 	<style type="text/css" media="screen">
-	
-	
-	#editor { 
+
+
+	#editor {
 		font-size: 16px;
 		border: 0px;
 		padding: 0px;
@@ -34,10 +34,10 @@
 		resize: none;
 	}
 	</style>
-	
+
 </head>
 <body>
-	
+
 
 	<div id="wrapper">
 		<!-- Sidebar -->
@@ -61,22 +61,24 @@
 				<li>
 					<button class="btn btn-default" onclick="save()">Save</button>
 				</li>
-
+				<li>
+					<button class="btn btn-default" onclick="diffTest()">Diff Test!</button>
+				</li>
 			</ul>
-			
-			
-			
+
+
+
 		</div>
 		<div id="tog">
 			<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">&gt;&gt;</a>
 		</div>
 		<!-- /#sidebar-wrapper -->
-		
+
 		<!-- Page Content -->
 		<div id="page-contxent-wrapper">
 
 			<pre id="editor">{{contents}}</pre>
-		</div> 
+		</div>
 		<!-- /#page-content-wrapper -->
 
 	</div>
@@ -125,6 +127,31 @@ function save() {
 		}
 	} );
 }
+
+var p_test = [];
+
+{{#revisions}}
+p_test.push("{{.}}");
+{{/revisions}}
+
+var diffObj;
+
+
+function diffTest() {
+	contents = editor.getValue();
+	if (p_test.length == 0) return;
+
+	$.post('/diffPath',
+	{
+		'contents': contents,
+		'urlVal': p_test[0]
+	},
+	function (data) {
+		console.log("Obtained diff!");
+		diffObj = data;
+	});
+}
+
 </script>
 
 

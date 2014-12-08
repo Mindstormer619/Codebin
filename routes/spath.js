@@ -5,9 +5,9 @@ var shortid = require('shortid');
 
 /* GET users listing. */
 router.post('/', function(req, res) {
-	//console.log(req.body.values)
-	//console.log(req.body.mode)
-	console.log("Referer: "+req.headers.referer);
+	//console.log("spath.js:"+req.body.values)
+	//console.log("spath.js:"+req.body.mode)
+	console.log("spath.js:"+"Referer: "+req.headers.referer);
 	var mode = req.body.mode;
 	var valText = req.body.values;
 	var urlVal = shortid.generate(); //or other function here
@@ -15,17 +15,17 @@ router.post('/', function(req, res) {
 	var dateCreated = Date.now();
 	var urlParts = req.headers.referer.split('/');
 	var prevVer = urlParts[urlParts.length - 1];
-	console.log("Prev Version: "+prevVer);
+	console.log("spath.js:"+"Prev Version: "+prevVer);
 
 	var db = req.db;
 	var collection = db.get('codebinData');
-	console.log("Got collection");
-	// console.log(process.env.PWD);
-	// console.log("Supposed path: "+require('path').join(process.env.PWD, 'files', urlVal)+".txt");
+	console.log("spath.js:"+"Got collection");
+	// console.log("spath.js:"+process.env.PWD);
+	// console.log("spath.js:"+"Supposed path: "+require('path').join(process.env.PWD, 'files', urlVal)+".txt");
 	fs.writeFile(require('path').join(__dirname, "..", 'files', urlVal)+".txt", valText, function(err) {
 		if (err) throw err;
 		//logging
-		console.log("Basically wrote file");
+		console.log("spath.js:"+"Basically wrote file");
 		var dataObject = {
 			'urlExt': urlVal,
 			'dateCreated': dateCreated,
@@ -39,8 +39,8 @@ router.post('/', function(req, res) {
 				if (err) throw err;
 				//inserted obj, redirect
 				console.dir(dataObject);
-				console.log("Inserted new object, redirect");
-				console.log("Redirection urlVal=>"+doc.urlExt);
+				console.log("spath.js:"+"Inserted new object, redirect");
+				console.log("spath.js:"+"Redirection urlVal=>"+doc.urlExt);
 				res.send({
 					'redirectTo': '/' + doc.urlExt
 				});
@@ -48,9 +48,9 @@ router.post('/', function(req, res) {
 		}
 
 		if (prevVer.length>0) {
-			console.log("Exists prev version");
+			console.log("spath.js:"+"Exists prev version");
 			collection.findOne({'urlExt': prevVer}).on('success', function (doc) {
-				console.log("Got current prev version object");
+				console.log("spath.js:"+"Got current prev version object");
 				var revisions = [];
 				if (doc['revisions']) {
 					revisions = doc['revisions'];
@@ -61,12 +61,12 @@ router.post('/', function(req, res) {
 			});
 		}
 		else {
-			console.log("No prev version");
+			console.log("spath.js:"+"No prev version");
 			dbInsertObj();
 		}
 
 	});
-	console.log("Reached end, for some reason");
+	console.log("spath.js:"+"Reached end, for some reason");
 	//res.end();
 	//next()
 });

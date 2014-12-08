@@ -17,7 +17,10 @@ var express = require('express');
 var router = express.Router();
 var jsdiff = require('diff');
 
+//console.log("diffpath.js" + ": At least we're here");
+
 router.post('/', function(req, res) {
+	console.log( "diffpath.js" + ": We're in");
 	/*
 		req is the request object. req sends the current text value and the selected previous version URL
 		req {
@@ -36,19 +39,19 @@ router.post('/', function(req, res) {
 	var currentContents = req.body.contents;
 	var urlCompare = req.body.urlVal;
 
-	console.log( __basename + ": Obtained request variables");
+	console.log( "diffpath.js" + ": Obtained request variables");
 
 	var db = req.db;
 	var dbCollection = db.get('codebinData');
 
-	console.log( __basename + ": Set collection from db");
+	console.log( "diffpath.js" + ": Set collection from db");
 
 	// Query database for file name
 
 	dbCollection.findOne ({'urlExt': urlCompare}, function (err, doc) {
 		// doc contains database return object
 		// err contains, error. Duh.
-		console.log ( __basename + ": db find callback");
+		console.log ( "diffpath.js" + ": db find callback");
 		if (err) throw err;
 
 		// Get filename from doc
@@ -56,7 +59,7 @@ router.post('/', function(req, res) {
 
 		//query file read now
 		fs.readFile(fName, function (err, data) {
-			console.log( __basename + ": fs read callback");
+			console.log( "diffpath.js" + ": fs read callback");
 			if (err) throw err;
 
 			var prevContents = data.toString();
@@ -64,9 +67,11 @@ router.post('/', function(req, res) {
 			//do the diffing
 			var diffObj = jsdiff.diffLines (prevContents, currentContents);
 
-			console.log( __basename + ": Done diffing. Sending response now");
+			console.log( "diffpath.js" + ": Done diffing. Sending response now");
 			res.send(diffObj);
 		});
 	});
 
 });
+
+module.exports = router;
