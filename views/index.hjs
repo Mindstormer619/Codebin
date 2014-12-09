@@ -62,7 +62,14 @@
 					<button class="btn btn-default" onclick="save()">Save</button>
 				</li>
 				<li>
-					<button class="btn btn-default" onclick="diffTest()">Diff Test!</button>
+					<input type="checkbox" id="diffCheck" value="DiffTest">Diff Test!
+				</li>
+				<li>
+					<select id="revs">
+						{{#revisions}}
+						<option>{{.}}</option>
+						{{/revisions}}
+					</select>
 				</li>
 			</ul>
 
@@ -70,6 +77,7 @@
 
 		</div>
 		<div id="tog">
+			<a href="/">CodeBIN!</a>
 			<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">&gt;&gt;</a>
 		</div>
 		<!-- /#sidebar-wrapper -->
@@ -130,6 +138,21 @@ function save() {
 
 var p_test = [];
 
+var diffCheck = $("#diffCheck");
+var currentContents = editor.getSession().getValue();
+
+diffCheck.change(function() {
+	alert("It changed!" + diffCheck.prop("checked"));
+	if (diffCheck.prop("checked") == true) {
+		currentContents = editor.getSession().getValue();
+		editor.setReadOnly(true);
+
+	}
+	else {
+		editor.getSession().setValue(currentContents);
+	}
+})
+
 {{#revisions}}
 p_test.push("{{.}}");
 {{/revisions}}
@@ -139,12 +162,15 @@ var diffObj;
 
 function diffTest() {
 	contents = editor.getValue();
-	if (p_test.length == 0) return;
+	if (p_test.length == 0) {
+		console.log("No previous version");
+		return;
+	}
 
 	$.post('/diffPath',
 	{
 		'contents': contents,
-		'urlVal': p_test[0]
+		'urlVal': $("#revs").val()
 	},
 	function (data) {
 		console.log("Obtained diff!");
