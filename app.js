@@ -10,7 +10,7 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/nodetest1');
 
-var routes = require('./routes/index');
+var indexRoute = require('./routes/index');
 //var users = require('./routes/users');
 var spath = require('./routes/spath');
 var diffpath = require('./routes/diffpath');
@@ -40,7 +40,7 @@ app.use(function(req, res, next){
 
 //using routes
 
-app.use('/', routes);
+app.use('/', indexRoute);
 //app.use('/users', users);
 app.use('/savePath', spath);
 app.use('/diffPath', diffpath);

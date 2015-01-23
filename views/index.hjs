@@ -56,6 +56,7 @@
 						<option value="mysql">MySQL</option>
 						<option value="csharp">C#</option>
 						<option value="xml">XML</option>
+						<option value="diff">Diff</option>
 					</select>
 				</li>
 				<li>
