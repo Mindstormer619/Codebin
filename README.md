@@ -1,6 +1,8 @@
 Codebin
 =======
 
+> Major rehaul coming up!
+
 A modern hackable, opensourced, userfriendly Pastebin for sharing text, codes, screen shots (images) with new features.  
 The server is implemented in NodeJS, with a MongoDB database. I have coded this in the Windows environment, however, it should work splendidly on Linux/Mac. In case there are any problems, feel free to [email me](mailto:mindstormer619@gmail.com).
 
